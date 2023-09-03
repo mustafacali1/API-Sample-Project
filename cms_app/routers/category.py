@@ -19,7 +19,12 @@ def get_db():
 db_dependency = Annotated[Session, Depends(get_db())]
 
 
-# DTO => Data Transfer Object
+# DTO => Data Transfer Object, UI => User Interface
+
+class CategoryDTO(BaseModel):
+    name: str
+    description: str = Field(min_length=2, max_length=100)
+
 
 @router.post('/category', status_code=status.HTTP_201_CREATED)
 async def create_category(db: db_dependency, category_dto: CategoryDTO):
