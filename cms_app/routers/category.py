@@ -39,3 +39,8 @@ async def create_category(db: db_dependency, category_dto: CategoryDTO):
         'status_code': 201,
         'transaction': 'Successful'
     }
+
+
+@router.get(path='/', status_code=status.HTTP_200_OK)
+async def get_all_categories(db: db_dependency):
+    return db.query(Category).all()
