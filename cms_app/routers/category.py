@@ -28,4 +28,16 @@ class CategoryDTO(BaseModel):
 
 @router.post('/category', status_code=status.HTTP_201_CREATED)
 async def create_category(db: db_dependency, category_dto: CategoryDTO):
-    pass
+    model = Category()
+
+    model.name = category_dto.name
+    model.description = category_dto.description
+    model.is_active = True
+
+    db. add(model)
+    db.commit()
+
+    return {
+        'status_code': 201,
+        'transaction': 'Successful'
+    }
