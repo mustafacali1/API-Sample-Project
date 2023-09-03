@@ -18,3 +18,9 @@ def get_db():
 
 db_dependency = Annotated[Session, Depends(get_db())]
 
+
+# DTO => Data Transfer Object
+
+@router.post('/category', status_code=status.HTTP_201_CREATED)
+async def create_category(db: db_dependency, category_dto: CategoryDTO):
+    pass
