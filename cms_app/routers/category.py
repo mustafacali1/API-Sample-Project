@@ -44,3 +44,17 @@ async def create_category(db: db_dependency, category_dto: CategoryDTO):
 @router.get(path='/', status_code=status.HTTP_200_OK)
 async def get_all_categories(db: db_dependency):
     return db.query(Category).all()
+
+
+@router.get(path='category/{category_id}', status_code=status.HTTP_200_OK)
+async def get_category_by_id(db:db_dependency, category_id: int= Path(gt=0)):
+    category_model = db.query(Category).filter(Category.id == category_id).first()
+
+    if category_model is not None:
+        return category_model
+
+    raise HTTPException(
+        status_code=404,
+        detail='Category not found'
+    )
+
