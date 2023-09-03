@@ -46,7 +46,7 @@ async def get_all_categories(db: db_dependency):
     return db.query(Category).all()
 
 
-@router.get(path='category/{category_id}', status_code=status.HTTP_200_OK)
+@router.get(path='/category/{category_id}', status_code=status.HTTP_200_OK)
 async def get_category_by_id(db:db_dependency, category_id: int= Path(gt=0)):
     category_model = db.query(Category).filter(Category.id == category_id).first()
 
